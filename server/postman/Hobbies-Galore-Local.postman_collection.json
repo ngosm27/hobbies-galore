@@ -1,0 +1,297 @@
+{
+	"info": {
+		"name": "hobbies galore local api",
+		"description": "Local Postman collection for the hobbies galore Express and MongoDB API.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "hobbyEventId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "hobbyCategoryId",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "server",
+			"item": [
+				{
+					"name": "root",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": ["{{baseUrl}}"],
+							"path": [""]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/health",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "health"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "hobby events",
+			"item": [
+				{
+					"name": "get all hobby events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/hobby-events",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "hobby-events"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get hobby event by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/hobby-events/{{hobbyEventId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "hobby-events", "{{hobbyEventId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create hobby event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const body = pm.response.json();",
+									"    pm.collectionVariables.set('hobbyEventId', body._id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"hobbyDateTime\": \"2026-08-02T23:15:00Z\",\n  \"activity\": \"Hike\",\n  \"people\": [\"Sydney\", \"Daysha\"],\n  \"location\": \"Reedy Creek Nature Preserve\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/hobby-events",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "hobby-events"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update hobby event",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"hobbyDateTime\": \"2026-08-03T10:00:00Z\",\n  \"activity\": \"Nature Walk\",\n  \"people\": [\"Sydney\", \"Daysha\", \"Susan\"],\n  \"location\": \"Reedy Creek Nature Preserve\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/hobby-events/{{hobbyEventId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "hobby-events", "{{hobbyEventId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete hobby event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/hobby-events/{{hobbyEventId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "hobby-events", "{{hobbyEventId}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "hobby categories",
+			"item": [
+				{
+					"name": "get all hobby categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/hobby-categories",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "hobby-categories"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get hobby category by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/hobby-categories/{{hobbyCategoryId}}",
+							"host": ["{{baseUrl}}"],
+							"path": [
+								"api",
+								"hobby-categories",
+								"{{hobbyCategoryId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create hobby category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const body = pm.response.json();",
+									"    pm.collectionVariables.set('hobbyCategoryId', body._id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Susan\",\n  \"type\": \"PEOPLE\",\n  \"category\": \"friends\",\n  \"subCategory\": \"old\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/hobby-categories",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "hobby-categories"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update hobby category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Susan\",\n  \"type\": \"PEOPLE\",\n  \"category\": \"friends\",\n  \"subCategory\": \"close\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/hobby-categories/{{hobbyCategoryId}}",
+							"host": ["{{baseUrl}}"],
+							"path": [
+								"api",
+								"hobby-categories",
+								"{{hobbyCategoryId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete hobby category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/hobby-categories/{{hobbyCategoryId}}",
+							"host": ["{{baseUrl}}"],
+							"path": [
+								"api",
+								"hobby-categories",
+								"{{hobbyCategoryId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
