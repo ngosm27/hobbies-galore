@@ -7,6 +7,8 @@ const {
 	closeMongo,
 	getDatabase,
 } = require("./db/mongo");
+const hobbyEventsRouter = require("./routes/hobbyEvents");
+const hobbyCategoriesRouter = require("./routes/hobbyCategories");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
@@ -27,6 +29,8 @@ app.get("/api/health", async (request, response, next) => {
 	}
 });
 
+app.use("/api/hobby-events", hobbyEventsRouter);
+app.use("/api/hobby-categories", hobbyCategoriesRouter);
 app.use(errorHandler);
 
 async function startServer() {
